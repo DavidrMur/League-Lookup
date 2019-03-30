@@ -12,18 +12,13 @@ getSummonerId = async () => {
     console.log('Getting user\'s summoner id');
     let summerIdEndpoint =  `https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${constants.SUMMONER_NAME}?api_key=${constants.API_KEY}`;
 
-    let promise = new Promise((resolve, reject) => {
-        request.get(summerIdEndpoint).then(res => {
-            // userSummonerId = res.body.id;
-            // resolve();
-            resolve(res.body.id)
-        })
-        .catch(err => {
-            console.log(err);
-        });
-    })
-
-    return await promise;
+    try {
+        let res = await request.get(summerIdEndpoint);
+        return res.body.id;
+    } catch (err) {
+        console.log(err);
+        throw new Error('Unable to get summoner ID');
+    }
 
 }
 
@@ -32,19 +27,13 @@ mapChampionNameToId = championName => (champions.champions[championName].id);
 getUserCurrentMatch = async (userSummonerId) => {
     let gameReponseEndpoint = `https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${userSummonerId}?api_key=${constants.API_KEY}`;
 
-    let promise = new Promise((resolve, reject) => {
-
-        request.get(gameReponseEndpoint).then(res => {
-            //console.log(res.body);
-            gameResponse = res.body.participants;
-            resolve(gameResponse);
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    })
-
-    return await promise;
+    try {
+        var res = await request.get(gameReponseEndpoint);
+        return res.body.participants;
+    } catch (err) {
+        console.log(err);
+        throw new Error('Could not retrieve current match');
+    }    
 }
 
 function findPlayerByChampion (championId, gameResponse){
