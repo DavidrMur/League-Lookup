@@ -1,23 +1,9 @@
-// const lookup = require("./lookup");
-// let resp;
-// let y = 'Their rank is ';
-// let x = lookup('braum').then(res => {
-//     resp = res;
-// });
-
-// setTimeout(function() {
-//     y += resp;
-//     console.log(y);
-// }, 5000)
-
 // Lambda Function code for Alexa.
 // Paste this into your index.js file. 
 
 const Alexa = require("ask-sdk");
 const https = require("https");
 const lookup = require("./lookup");
-
-let accessToken;
 
 
 const invocationName = "league lookup";
@@ -199,7 +185,6 @@ const GetSummonerRank_Handler =  {
         //   SLOT: CHAMPION_NAME 
         if (slotValues.CHAMPION_NAME.heardAs && slotValues.CHAMPION_NAME.heardAs !== '') {
             slotStatus += ' slot CHAMPION_NAME was heard as ' + slotValues.CHAMPION_NAME.heardAs + '. ';
-            // slotStatus += 'uuid' + request.session.user.accessToken;
         } else {
             slotStatus += 'slot CHAMPION_NAME is empty. ';
         }
@@ -243,7 +228,7 @@ const LaunchRequest_Handler =  {
         const responseBuilder = handlerInput.responseBuilder;
         const request = handlerInput.requestEnvelope.request;
 
-        let say = 'hello' + ' and welcome to ' + invocationName + ' ! Say help to hear some options.'; // + handlerInput.requestEnvelope.session['user']['accessToken'] + 'a' + handlerInput.requestEnvelope.session.user['accessToken'] + 'b' + handlerInput.requestEnvelope.session['accessToken'];
+        let say = 'hello' + ' and welcome to ' + invocationName + ' ! Say help to hear some options.';
         //accessToken = handlerInput.requestEnvelope.session['user']['accessToken'];
         let skillTitle = capitalize(invocationName);
 

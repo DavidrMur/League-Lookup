@@ -27,9 +27,8 @@ getSummonerName = async (userAccessToken) => {
             else {
                 let summonerName = data.Body.toString('ascii');
                 summonerName = summonerName.split(":").pop();
-                console.log(summonerName);
                 resolve(summonerName);
-            }          // successful response
+            }
           });
     })
     return await promise;
@@ -41,9 +40,6 @@ getSummonerId = async (summonerName) => {
 
     let promise = new Promise((resolve, reject) => {
         request.get(summerIdEndpoint).then(res => {
-            // userSummonerId = res.body.id;
-            // resolve();
-            console.log(res.body.id);
             resolve(res.body.id)
         })
         .catch(err => {
@@ -63,7 +59,6 @@ getUserCurrentMatch = async (userSummonerId) => {
     let promise = new Promise((resolve, reject) => {
 
         request.get(gameReponseEndpoint).then(res => {
-            //console.log(res.body);
             gameResponse = res.body.participants;
             resolve(gameResponse);
         })
@@ -87,7 +82,6 @@ function findPlayerByChampion (championId, gameResponse){
         if (gameResponse[i].championId == championId) {
             searchedSummonerId = gameResponse[i].summonerId;
             return searchedSummonerId;
-            // console.log(searchedSummonerId);
         }
     }
 
@@ -100,7 +94,6 @@ getSummonerRank = async (searchedSummonerId) => {
 
     let promise = new Promise((resolve, reject) => {
         request.get(summonerRankEndpoint).then(res => {
-            // console.log(res.body);
             resolve(res.body[0]);
         })
         .catch(err => {
@@ -120,13 +113,9 @@ module.exports = async function lookup(championName, userAccessToken) {
     // [API] Fetch the corresponding summoner's rank -- Needs some exploring
     const userSummonerName = await getSummonerName(userAccessToken);
     const userSummonerId = await getSummonerId(userSummonerName);
-    //console.log(userSummonerId);
     const championId = await mapChampionNameToId(championName);
-    // // console.log(championId);
     const gameResponse = await getUserCurrentMatch(userSummonerId);
-    // // console.log(gameResponse);
     const summonerId = await findPlayerByChampion(championId, gameResponse);
-    // // console.log(summonerId);
     const summonerRank = await getSummonerRank(summonerId);
     
     let promise = new Promise((resolve, reject) => {
@@ -134,25 +123,3 @@ module.exports = async function lookup(championName, userAccessToken) {
     })
     return await promise;
 };
-
-// test = async () => {
-//     let championName = 'ezreal'
-//     const userSummonerName = await getSummonerName('394aea50-ace5-11e9-9211-a776bb2faed2');
-//     const userSummonerId = await getSummonerId(userSummonerName);
-//     //console.log(userSummonerId);
-//     const championId = await mapChampionNameToId(championName);
-//     // // console.log(championId);
-//     const gameResponse = await getUserCurrentMatch(userSummonerId);
-//     // // console.log(gameResponse);
-//     const summonerId = await findPlayerByChampion(championId, gameResponse);
-//     // // console.log(summonerId);
-//     const summonerRank = await getSummonerRank(summonerId);
-    
-//     let promise = new Promise((resolve, reject) => {
-//         console.log(summonerRank);
-//         resolve(summonerRank);
-//     })
-//     return await promise;
-// }
-
-// test();
