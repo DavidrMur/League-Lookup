@@ -1,4 +1,5 @@
 const request = require('superagent');
+const AWS = require ('aws-sdk');
 const champions = require('./champions.js');
 const constants = require('./constants');
 const romanToDecimal = {
@@ -8,17 +9,45 @@ const romanToDecimal = {
     IV: 4
 }
 
-getSummonerId = async () => {
-    console.log('Getting user\'s summoner id');
-    let summerIdEndpoint =  `https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${constants.SUMMONER_NAME}?api_key=${constants.API_KEY}`;
+let s3 = new AWS.S3({
+    accessKeyId: constants.AWS_ACCESS_KEY,
+    secretAccessKey: constants.AWS_SECRET_KEY
+});
 
-    try {
-        let res = await request.get(summerIdEndpoint);
-        return res.body.id;
-    } catch (err) {
-        console.log(err);
-        throw new Error('Unable to get summoner ID');
+getSummonerName = async (userAccessToken) => {
+    console.log('Getting user\'s summoner name');
+    let options = {
+        Bucket: constants.BUCKET_NAME,
+        Key: userAccessToken
     }
+
+    let promise = new Promise((resolve, reject) => {
+        s3.getObject(options, function(err, data) {
+            if (err) console.log(err, err.stack); // an error occurred
+            else {
+                let summonerName = data.Body.toString('ascii');
+                summonerName = summonerName.split(":").pop();
+                resolve(summonerName);
+            }
+          });
+    })
+    return await promise;
+}
+
+getSummonerId = async (summonerName) => {
+    console.log('Getting user\'s summoner id');
+    let summerIdEndpoint =  `https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${summonerName}?api_key=${constants.API_KEY}`;
+
+    let promise = new Promise((resolve, reject) => {
+        request.get(summerIdEndpoint).then(res => {
+            resolve(res.body.id)
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    })
+
+    return await promise;
 
 }
 
@@ -27,13 +56,18 @@ mapChampionNameToId = championName => (champions.champions[championName].id);
 getUserCurrentMatch = async (userSummonerId) => {
     let gameReponseEndpoint = `https://na1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${userSummonerId}?api_key=${constants.API_KEY}`;
 
-    try {
-        var res = await request.get(gameReponseEndpoint);
-        return res.body.participants;
-    } catch (err) {
-        console.log(err);
-        throw new Error('Could not retrieve current match');
-    }    
+    let promise = new Promise((resolve, reject) => {
+
+        request.get(gameReponseEndpoint).then(res => {
+            gameResponse = res.body.participants;
+            resolve(gameResponse);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    })
+
+    return await promise;
 }
 
 function findPlayerByChampion (championId, gameResponse){
@@ -48,7 +82,6 @@ function findPlayerByChampion (championId, gameResponse){
         if (gameResponse[i].championId == championId) {
             searchedSummonerId = gameResponse[i].summonerId;
             return searchedSummonerId;
-            // console.log(searchedSummonerId);
         }
     }
 
@@ -57,11 +90,10 @@ function findPlayerByChampion (championId, gameResponse){
 
 getSummonerRank = async (searchedSummonerId) => {
     console.log('Getting summoner rank...');
-    const summonerRankEndpoint = `https://na1.api.riotgames.com/lol/league/v4/positions/by-summoner/${searchedSummonerId}?api_key=${constants.API_KEY}`;
+    const summonerRankEndpoint = `https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${searchedSummonerId}?api_key=${constants.API_KEY}`;
 
     let promise = new Promise((resolve, reject) => {
         request.get(summonerRankEndpoint).then(res => {
-            // console.log(res.body);
             resolve(res.body[0]);
         })
         .catch(err => {
@@ -73,20 +105,17 @@ getSummonerRank = async (searchedSummonerId) => {
     return (`Summoner Rank: ${summonerRank.tier} ${romanToDecimal[summonerRank.rank]}`);
 }
 
-module.exports = async function lookup(championName) {
+module.exports = async function lookup(championName, userAccessToken) {
     // Map the champion name to an id
     // [API] Fetch user's current game with spectator
     // Parse through current game data and find the corresponding champion id
         // Take the summonerId of the champion being played
     // [API] Fetch the corresponding summoner's rank -- Needs some exploring
-    const userSummonerId = await getSummonerId();
-    // console.log(userSummonerId);
+    const userSummonerName = await getSummonerName(userAccessToken);
+    const userSummonerId = await getSummonerId(userSummonerName);
     const championId = await mapChampionNameToId(championName);
-    // console.log(championId);
     const gameResponse = await getUserCurrentMatch(userSummonerId);
-    // console.log(gameResponse);
     const summonerId = await findPlayerByChampion(championId, gameResponse);
-    // console.log(summonerId);
     const summonerRank = await getSummonerRank(summonerId);
     
     let promise = new Promise((resolve, reject) => {
@@ -94,11 +123,3 @@ module.exports = async function lookup(championName) {
     })
     return await promise;
 };
-
-// gameResponse('g6GAHN-TWiOOGITwpPvQ6lQcSW8n23Hz0dpDMRy-mppIlOs', findPlayerByChampion).then(() => {
-//     setTimeout( () => {
-//         getSummonerRank();
-//     }, 1000)
-// });
-
-// try an async fucntion and using await?

@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "ask-sdk": "^2.4.0",
+    "aws-sdk": "^2.467.0",
     "superagent": "^4.1.0"
   }
 }
