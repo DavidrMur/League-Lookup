@@ -17,6 +17,7 @@ const Alexa = require("ask-sdk");
 const https = require("https");
 const lookup = require("./lookup");
 
+let accessToken;
 
 
 const invocationName = "league lookup";
@@ -191,13 +192,14 @@ const GetSummonerRank_Handler =  {
         let resolvedSlot;
 
         let slotValues = getSlotValues(request.intent.slots); 
-        response = await lookup(slotValues.CHAMPION_NAME.resolved);
+        response = await lookup(slotValues.CHAMPION_NAME.resolved, handlerInput.requestEnvelope.session['user']['accessToken']);
         // getSlotValues returns .heardAs, .resolved, and .isValidated for each slot, according to request slot status codes ER_SUCCESS_MATCH, ER_SUCCESS_NO_MATCH, or traditional simple request slot without resolutions
 
         // console.log('***** slotValues: ' +  JSON.stringify(slotValues, null, 2));
         //   SLOT: CHAMPION_NAME 
         if (slotValues.CHAMPION_NAME.heardAs && slotValues.CHAMPION_NAME.heardAs !== '') {
             slotStatus += ' slot CHAMPION_NAME was heard as ' + slotValues.CHAMPION_NAME.heardAs + '. ';
+            // slotStatus += 'uuid' + request.session.user.accessToken;
         } else {
             slotStatus += 'slot CHAMPION_NAME is empty. ';
         }
@@ -239,9 +241,10 @@ const LaunchRequest_Handler =  {
     },
     handle(handlerInput) {
         const responseBuilder = handlerInput.responseBuilder;
+        const request = handlerInput.requestEnvelope.request;
 
-        let say = 'hello' + ' and welcome to ' + invocationName + ' ! Say help to hear some options.';
-
+        let say = 'hello' + ' and welcome to ' + invocationName + ' ! Say help to hear some options.'; // + handlerInput.requestEnvelope.session['user']['accessToken'] + 'a' + handlerInput.requestEnvelope.session.user['accessToken'] + 'b' + handlerInput.requestEnvelope.session['accessToken'];
+        //accessToken = handlerInput.requestEnvelope.session['user']['accessToken'];
         let skillTitle = capitalize(invocationName);
 
 
@@ -626,7 +629,7 @@ const ResponseRecordSpeechOutputInterceptor = {
         let sessionAttributes = handlerInput.attributesManager.getSessionAttributes(); 
         let lastSpeechOutput = { 
             "outputSpeech":responseOutput.outputSpeech.ssml, 
-            "reprompt":responseOutput.reprompt.outputSpeech.ssml 
+            "reprompt":responseOutput.reprompt.outputSpeech.ssml ,
         }; 
  
         sessionAttributes['lastSpeechOutput'] = lastSpeechOutput; 
@@ -775,6 +778,11 @@ const model = {
             {
                 "name": {
                     "value": "ezreal"
+                }
+            },
+            {
+                "name": {
+                    "value": "poppy"
                 }
             },
             {

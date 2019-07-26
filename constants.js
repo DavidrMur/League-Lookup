@@ -1,0 +1,6 @@
+module.exports = {
+    API_KEY:'RGAPI-08397841-817a-411e-b51e-9e860b527395',
+    AWS_ACCESS_KEY: 'AKIAWF6LCRCWVKJ62BHJ',
+    AWS_SECRET_KEY: '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',
+    BUCKET_NAME: 'league-lookup-users'
+};

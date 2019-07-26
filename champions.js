@@ -29,6 +29,9 @@ exports.champions = {
     elise : {
         id: 60
     },
+    poppy : {
+        id: 78
+    },
     ziggs : {
         id: 115
     },
