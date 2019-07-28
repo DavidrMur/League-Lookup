@@ -14,6 +14,8 @@ let s3 = new AWS.S3({
     secretAccessKey: constants.AWS_SECRET_KEY
 });
 
+let gameType;
+
 getSummonerName = async (userAccessToken) => {
     console.log('Getting user\'s summoner name');
     let options = {
@@ -59,6 +61,7 @@ getUserCurrentMatch = async (userSummonerId) => {
     let promise = new Promise((resolve, reject) => {
 
         request.get(gameReponseEndpoint).then(res => {
+            gameType = res.body.gameQueueConfigId;
             gameResponse = res.body.participants;
             resolve(gameResponse);
         })
@@ -91,10 +94,33 @@ function findPlayerByChampion (championId, gameResponse){
 getSummonerRank = async (searchedSummonerId) => {
     console.log('Getting summoner rank...');
     const summonerRankEndpoint = `https://na1.api.riotgames.com/lol/league/v4/entries/by-summoner/${searchedSummonerId}?api_key=${constants.API_KEY}`;
+    let rankedSelection;
+    let isSelectionRanked;
+
+    switch(gameType) {
+        // TODO add support for TT and TFT game modes
+        case '440':
+            rankedSelection = 'RANKED_FLEX_5x5';
+            break;
+        case '420':    
+        default:
+            // For unsupported game modes, probably what people are looking for
+            rankedSelection = 'RANKED_SOLO_5x5';       
+    }
 
     let promise = new Promise((resolve, reject) => {
         request.get(summonerRankEndpoint).then(res => {
-            resolve(res.body[0]);
+            let i = 0;
+            while (res.body[i] && res.body[i].queueType !== rankedSelection) {
+                i++;
+            }
+            if (res.body[i]) {
+                isSelectionRanked = true;
+                resolve(res.body[i])
+            } else {
+                isSelectionRanked = false;
+                resolve(null);
+            }
         })
         .catch(err => {
             console.log(err);
@@ -102,7 +128,7 @@ getSummonerRank = async (searchedSummonerId) => {
     });
 
     let summonerRank = await promise;
-    return (`Summoner Rank: ${summonerRank.tier} ${romanToDecimal[summonerRank.rank]}`);
+    return isSelectionRanked ? (`Summoner Rank: ${summonerRank.tier} ${romanToDecimal[summonerRank.rank]}`) : ('`Summoner is unranked');
 }
 
 module.exports = async function lookup(championName, userAccessToken) {
