@@ -757,29 +757,599 @@ const model = {
             },
             {
                 "name": {
-                    "value": "ziggs"
+                  "value": "zilean"
                 }
-            },
+              },
             {
                 "name": {
-                    "value": "irelia"
+                  "value": "ziggs"
                 }
-            },
+              },
             {
                 "name": {
-                    "value": "ezreal"
+                  "value": "zed"
                 }
-            },
+              },
             {
                 "name": {
-                    "value": "poppy"
+                  "value": "zac"
                 }
-            },
+              },
             {
                 "name": {
-                    "value": "Elise"
+                  "value": "yorick"
                 }
-            },
+              },
+            {
+                "name": {
+                  "value": "yasuo"
+                }
+              },
+            {
+                "name": {
+                  "value": "xinzhao"
+                }
+              },
+            {
+                "name": {
+                  "value": "xerath"
+                }
+              },
+            {
+                "name": {
+                  "value": "warwick"
+                }
+              },
+            {
+                "name": {
+                  "value": "volibear"
+                }
+              },
+            {
+                "name": {
+                  "value": "vladimir"
+                }
+              },
+            {
+                "name": {
+                  "value": "viktor"
+                }
+              },
+            {
+                "name": {
+                  "value": "vi"
+                }
+              },
+            {
+                "name": {
+                  "value": "velkoz"
+                }
+              },
+            {
+                "name": {
+                  "value": "veigar"
+                }
+              },
+            {
+                "name": {
+                  "value": "vayne"
+                }
+              },
+            {
+                "name": {
+                  "value": "varus"
+                }
+              },
+            {
+                "name": {
+                  "value": "urgot"
+                }
+              },
+            {
+                "name": {
+                  "value": "udyr"
+                }
+              },
+            {
+                "name": {
+                  "value": "twitch"
+                }
+              },
+            {
+                "name": {
+                  "value": "twistedfate"
+                }
+              },
+            {
+                "name": {
+                  "value": "tryndamere"
+                }
+              },
+            {
+                "name": {
+                  "value": "trundle"
+                }
+              },
+            {
+                "name": {
+                  "value": "tristana"
+                }
+              },
+            {
+                "name": {
+                  "value": "thresh"
+                }
+              },
+            {
+                "name": {
+                  "value": "teemo"
+                }
+              },
+            {
+                "name": {
+                  "value": "taric"
+                }
+              },
+            {
+                "name": {
+                  "value": "talon"
+                }
+              },
+            {
+                "name": {
+                  "value": "taliyah"
+                }
+              },
+            {
+                "name": {
+                  "value": "tahmkench"
+                }
+              },
+            {
+                "name": {
+                  "value": "syndra"
+                }
+              },
+            {
+                "name": {
+                  "value": "swain"
+                }
+              },
+            {
+                "name": {
+                  "value": "soraka"
+                }
+              },
+            {
+                "name": {
+                  "value": "sona"
+                }
+              },
+            {
+                "name": {
+                  "value": "skarner"
+                }
+              },
+            {
+                "name": {
+                  "value": "sivir"
+                }
+              },
+            {
+                "name": {
+                  "value": "sion"
+                }
+              },
+            {
+                "name": {
+                  "value": "singed"
+                }
+              },
+            {
+                "name": {
+                  "value": "shyvana"
+                }
+              },
+            {
+                "name": {
+                  "value": "shen"
+                }
+              },
+            {
+                "name": {
+                  "value": "shaco"
+                }
+              },
+            {
+                "name": {
+                  "value": "sejuani"
+                }
+              },
+            {
+                "name": {
+                  "value": "ryze"
+                }
+              },
+            {
+                "name": {
+                  "value": "rumble"
+                }
+              },
+            {
+                "name": {
+                  "value": "riven"
+                }
+              },
+            {
+                "name": {
+                  "value": "rengar"
+                }
+              },
+            {
+                "name": {
+                  "value": "renekton"
+                }
+              },
+            {
+                "name": {
+                  "value": "reksai"
+                }
+              },
+            {
+                "name": {
+                  "value": "rammus"
+                }
+              },
+            {
+                "name": {
+                  "value": "quinn"
+                }
+              },
+            {
+                "name": {
+                  "value": "poppy"
+                }
+              },
+            {
+                "name": {
+                  "value": "pantheon"
+                }
+              },
+            {
+                "name": {
+                  "value": "orianna"
+                }
+              },
+            {
+                "name": {
+                  "value": "olaf"
+                }
+              },
+            {
+                "name": {
+                  "value": "nunu"
+                }
+              },
+            {
+                "name": {
+                  "value": "nocturne"
+                }
+              },
+            {
+                "name": {
+                  "value": "nidalee"
+                }
+              },
+            {
+                "name": {
+                  "value": "nautilus"
+                }
+              },
+            {
+                "name": {
+                  "value": "nasus"
+                }
+              },
+            {
+                "name": {
+                  "value": "nami"
+                }
+              },
+            {
+                "name": {
+                  "value": "morgana"
+                }
+              },
+            {
+                "name": {
+                  "value": "mordekaiser"
+                }
+              },
+            {
+                "name": {
+                  "value": "wukong"
+                }
+              },
+            {
+                "name": {
+                  "value": "missfortune"
+                }
+              },
+            {
+                "name": {
+                  "value": "masteryi"
+                }
+              },
+            {
+                "name": {
+                  "value": "maokai"
+                }
+              },
+            {
+                "name": {
+                  "value": "malzahar"
+                }
+              },
+            {
+                "name": {
+                  "value": "malphite"
+                }
+              },
+            {
+                "name": {
+                  "value": "lux"
+                }
+              },
+            {
+                "name": {
+                  "value": "lulu"
+                }
+              },
+            {
+                "name": {
+                  "value": "lucian"
+                }
+              },
+            {
+                "name": {
+                  "value": "lissandra"
+                }
+              },
+            {
+                "name": {
+                  "value": "leona"
+                }
+              },
+            {
+                "name": {
+                  "value": "leesin"
+                }
+              },
+            {
+                "name": {
+                  "value": "leblanc"
+                }
+              },
+            {
+                "name": {
+                  "value": "kogmaw"
+                }
+              },
+            {
+                "name": {
+                  "value": "kled"
+                }
+              },
+            {
+                "name": {
+                  "value": "kindred"
+                }
+              },
+            {
+                "name": {
+                  "value": "khazix"
+                }
+              },
+            {
+                "name": {
+                  "value": "kennen"
+                }
+              },
+            {
+                "name": {
+                  "value": "kayle"
+                }
+              },
+            {
+                "name": {
+                  "value": "katarina"
+                }
+              },
+            {
+                "name": {
+                  "value": "kassadin"
+                }
+              },
+            {
+                "name": {
+                  "value": "karthus"
+                }
+              },
+            {
+                "name": {
+                  "value": "karma"
+                }
+              },
+            {
+                "name": {
+                  "value": "kalista"
+                }
+              },
+            {
+                "name": {
+                  "value": "jinx"
+                }
+              },
+            {
+                "name": {
+                  "value": "jhin"
+                }
+              },
+            {
+                "name": {
+                  "value": "jayce"
+                }
+              },
+            {
+                "name": {
+                  "value": "jax"
+                }
+              },
+            {
+                "name": {
+                  "value": "jarvan"
+                }
+              },
+            {
+                "name": {
+                  "value": "janna"
+                }
+              },
+            {
+                "name": {
+                  "value": "ivern"
+                }
+              },
+            {
+                "name": {
+                  "value": "irelia"
+                }
+              },
+            {
+                "name": {
+                  "value": "illaoi"
+                }
+              },
+            {
+                "name": {
+                  "value": "heimerdinger"
+                }
+              },
+            {
+                "name": {
+                  "value": "hecarim"
+                }
+              },
+            {
+                "name": {
+                  "value": "graves"
+                }
+              },
+            {
+                "name": {
+                  "value": "gragas"
+                }
+              },
+            {
+                "name": {
+                  "value": "gnar"
+                }
+              },
+            {
+                "name": {
+                  "value": "garen"
+                }
+              },
+            {
+                "name": {
+                  "value": "gangplank"
+                }
+              },
+            {
+                "name": {
+                  "value": "galio"
+                }
+              },
+            {
+                "name": {
+                  "value": "fizz"
+                }
+              },
+            {
+                "name": {
+                  "value": "fiora"
+                }
+              },
+            {
+                "name": {
+                  "value": "fiddlesticks"
+                }
+              },
+            {
+                "name": {
+                  "value": "ezreal"
+                }
+              },
+            {
+                "name": {
+                  "value": "evelynn"
+                }
+              },
+            {
+                "name": {
+                  "value": "elise"
+                }
+              },
+            {
+                "name": {
+                  "value": "ekko"
+                }
+              },
+            {
+                "name": {
+                  "value": "drmundo"
+                }
+              },
+            {
+                "name": {
+                  "value": "draven"
+                }
+              },
+            {
+                "name": {
+                  "value": "diana"
+                }
+              },
+            {
+                "name": {
+                  "value": "darius"
+                }
+              },
+            {
+                "name": {
+                  "value": "corki"
+                }
+              },
+            {
+                "name": {
+                  "value": "chogath"
+                }
+              },
+            {
+                "name": {
+                  "value": "cassiopeia"
+                }
+              },
+            {
+                "name": {
+                  "value": "camille"
+                }
+              },
+            {
+                "name": {
+                  "value": "caitlyn"
+                }
+              },
             {
               "name": {
                 "value": "braum"
@@ -787,68 +1357,67 @@ const model = {
             },
             {
               "name": {
-                "value": "Brand"
+                "value": "brand"
               }
             },
             {
               "name": {
-                "value": "Blitzcrank"
+                "value": "blitzcrank"
               }
             },
             {
               "name": {
-                "value": "Bard"
+                "value": "bard"
               }
             },
             {
               "name": {
-                "value": "Azir"
+                "value": "azir"
               }
             },
             {
               "name": {
-                "value": "Aurelion Sol"
+                "value": "aurelion Sol"
               }
             },
             {
               "name": {
-                "value": "Ashe"
+                "value": "ashe"
               }
             },
             {
               "name": {
-                "value": "Annie"
+                "value": "annie"
               }
             },
             {
-              "id": "1",
               "name": {
                 "value": "anivia"
               }
             },
             {
               "name": {
-                "value": "Amumu"
+                "value": "amumu"
               }
             },
             {
               "name": {
-                "value": "Alistar"
+                "value": "alistar"
               }
             },
             {
               "name": {
-                "value": "Akali"
+                "value": "akali"
               }
             },
             {
               "name": {
-                "value": "Ahri"
+                "value": "ahri"
               }
             },
             {
               "name": {
-                "value": "Aatrox"
+                "value": "aatrox"
               }
             }
           ]
