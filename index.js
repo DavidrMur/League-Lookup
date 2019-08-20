@@ -172,7 +172,7 @@ const GetSummonerRank_Handler =  {
                 .getResponse();
 
         } 
-        let say = 'Hello from GetSummonerRank. ';
+        let say = '';
 
         let slotStatus = '';
         let resolvedSlot;
@@ -184,19 +184,14 @@ const GetSummonerRank_Handler =  {
         // console.log('***** slotValues: ' +  JSON.stringify(slotValues, null, 2));
         //   SLOT: CHAMPION_NAME 
         if (slotValues.CHAMPION_NAME.heardAs && slotValues.CHAMPION_NAME.heardAs !== '') {
-            slotStatus += ' slot CHAMPION_NAME was heard as ' + slotValues.CHAMPION_NAME.heardAs + '. ';
+            slotStatus += slotValues.CHAMPION_NAME.heardAs + '. '
         } else {
             slotStatus += 'slot CHAMPION_NAME is empty. ';
         }
         if (slotValues.CHAMPION_NAME.ERstatus === 'ER_SUCCESS_MATCH') {
-            slotStatus += 'a valid ';
             if(slotValues.CHAMPION_NAME.resolved !== slotValues.CHAMPION_NAME.heardAs) {
                 slotStatus += 'synonym for ' + slotValues.CHAMPION_NAME.resolved + '. '; 
-                } else {
-                slotStatus += 'match. '
-                slotStatus += 'passed.';
-            } // else {
-                //
+                } 
         }
         if (slotValues.CHAMPION_NAME.ERstatus === 'ER_SUCCESS_NO_MATCH') {
             slotStatus += 'which did not match any slot value. ';

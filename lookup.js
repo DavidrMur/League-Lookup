@@ -128,7 +128,7 @@ getSummonerRank = async (searchedSummonerId) => {
     });
 
     let summonerRank = await promise;
-    return isSelectionRanked ? (`Summoner Rank: ${summonerRank.tier} ${romanToDecimal[summonerRank.rank]}`) : ('`Summoner is unranked');
+    return isSelectionRanked ? (`${summonerRank.tier} ${romanToDecimal[summonerRank.rank]}`) : ('Summoner is unranked');
 }
 
 module.exports = async function lookup(championName, userAccessToken) {
